@@ -99,15 +99,17 @@ public class DataMigrateApplication {
             Class.forName(dataSourceProperties.getTargetDriver());
             targetConn = DriverManager.getConnection(dataSourceProperties.getTargetUrl(), dataSourceProperties.getTargetUsername(),
                     dataSourceProperties.getTargetPassword());
-            preparedStatement = targetConn.prepareStatement("insert into \"Test\"(\"id\",\"EventLogKey\",\"Value\",\"Quality\",\"QualityDetail\") values(?,?,?,?,?)");
+            // preparedStatement = targetConn.prepareStatement("insert into \"Test\"(\"id\",\"EventLogKey\",\"Value\",\"Quality\",\"QualityDetail\") values(?,?,?,?,?)");
+            // String sql="insert into mystu(id,name,age,gender) values(myseq.nextval,?,?,?)"; //myseq是oracle中的某个序列名称
+            preparedStatement = targetConn.prepareStatement("insert into Test(id,EventLogKey,Value,Quality,QualityDetail) values(?,?,?,?,?)");
             for (int i = 0; i < 300; i++) {
                 Integer eventLogKey = (Integer) listMap.get(i).get("EventLogKey");
                 Float value = (Float) listMap.get(i).get("Value");
                 Integer quality = (Integer) listMap.get(i).get("Quality");
                 Integer qualityDetail = (Integer) listMap.get(i).get("QualityDetail");
-                String insertSql = "insert into \"Test\"(id,EventLogKey,Value,Quality,QualityDetail)"
-                        + "values(" + i + ",'" + eventLogKey + "','" + value + "','" + quality + "','" + qualityDetail + "')";
-                log.info("sql:{}", insertSql);
+                // String insertSql = "insert into \"Test\"(id,EventLogKey,Value,Quality,QualityDetail)"
+                //         + "values(" + i + ",'" + eventLogKey + "','" + value + "','" + quality + "','" + qualityDetail + "')";
+                // log.info("sql:{}", insertSql);
                 preparedStatement.setInt(1, i);
                 preparedStatement.setInt(2, eventLogKey);
                 preparedStatement.setFloat(3, value);
