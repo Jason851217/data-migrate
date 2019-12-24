@@ -1,0 +1,16 @@
+ 
+    Create tablespace HX_DATA
+
+    datafile 'E:\work\oracle\data\donghu.dbf'
+
+    size 50m
+
+    autoextend on
+
+    next 50m
+
+
+ 
+ Create user DBO_DONGHU_PORTAL identified by zzz default tablespace HX_DATA temporary tablespace temp;
+ 
+ Grant connect,dba to DBO_DONGHU_PORTAL;
